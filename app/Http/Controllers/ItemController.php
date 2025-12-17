@@ -30,10 +30,5 @@ class ItemController extends Controller
 
         return view('items.edit', compact('item'));
     }
-
-    // public function mine()
-    // {
-    //     return view('items.mine');
-    // }
 }
 

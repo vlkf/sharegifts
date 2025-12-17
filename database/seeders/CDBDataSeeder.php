@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Vote;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class CDBDataSeeder extends Seeder
@@ -20,11 +21,15 @@ class CDBDataSeeder extends Seeder
     public function run(): void
     {
         DB::transaction(function () {
-            $users = User::factory()->count(30)->create();
+            $testUser = User::firstOrCreate([
+                'name' => 'Test user',
+                'email' => 'test@test.com',
+                'password' => Hash::make('password'),
+            ]);
 
-            if (Category::count() === 0) {
-                $this->call(CategorySeeder::class);
-            }
+            $users = User::factory()->count(30)->create();
+            $users->push($testUser);
+
             $categories = Category::all();
 
             $items = Item::factory()
@@ -57,13 +62,20 @@ class CDBDataSeeder extends Seeder
 
                 $voterCount = random_int(0, 20);
                 $voters = $users->random(min($voterCount, $users->count()));
+                $score = 0;
 
                 foreach ($voters as $u) {
+                    $value = fake()->randomElement([1, -1]);
+
                     Vote::updateOrCreate(
                         ['item_id' => $item->id, 'user_id' => $u->id],
-                        ['value' => fake()->randomElement([1, -1])]
+                        ['value' => $value]
                     );
+
+                    $score += $value;
                 }
+
+                $item->update(['score' => $score]);
             }
         });
     }
