@@ -79,6 +79,10 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('items.index') }}">
+                                    Feed
+                                </a>
+                                
                                 <a class="dropdown-item" href="{{ route('items.create') }}">
                                     Post item
                                 </a>

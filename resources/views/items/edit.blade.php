@@ -14,7 +14,7 @@
 
 <div class="card shadow-sm">
     <div class="card-body">
-        <livewire:item-form :item="$item" />
+        <livewire:item-form :item="$item->id" />
     </div>
 </div>
 @endsection

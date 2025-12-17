@@ -22,5 +22,3 @@ Route::middleware('auth')->group(function () {
     //Route::get('/my-items', [ItemController::class, 'mine'])->name('items.mine');
 });
 
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
