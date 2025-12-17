@@ -62,15 +62,11 @@
     {{-- Grid --}}
     <div class="row g-3">
         @forelse($items as $item)
-            @php
-                $firstPhoto = $item->photos->first();
-                $thumbUrl = $firstPhoto ? asset('storage/'.$firstPhoto->path) : null;
-            @endphp
 
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card h-100 shadow-sm">
                     @if($thumbUrl)
-                        <img src="{{ $thumbUrl }}" class="card-img-top" alt="Photo of {{ $item->title }}" style="height: 180px; object-fit: cover;">
+                        <img src="{{ asset('storage/'.$photo->path) }}" class="card-img-top" alt="Photo of {{ $item->title }}" style="height: 180px; object-fit: cover;">
                     @else
                         <div class="bg-secondary-subtle d-flex align-items-center justify-content-center" style="height: 180px;">
                             <span class="text-muted">No photo</span>

@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ItemPhoto extends Model
 {
+    use HasFactory;
+    
     protected $fillable = ['item_id', 'path', 'sort_order'];
 
     public function item(): BelongsTo
